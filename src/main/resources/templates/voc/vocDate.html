@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>VOC Board</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <style>
+        .big-width {display: block;}
+        .small-width {display: none;}
+        div#searchWrap{display: flex;}
+        select[name='type']{width: 30%;}
+        input[name='keyword']{width: 60%;}
+        form[name='searchForm']{overflow: hidden;}
+
+        @media (max-width: 918px) {
+            .writer {display: none;}
+            .regDate {display: none;}
+            .updateDate {display: none;}
+            .big-width {display: none;}
+            .small-width {display: block;}
+            div#searchWrap{display: block;}
+            select[name='type']{width: 100%;}
+            input[name='keyword']{width: 100%;}
+            a.search{width: 100%;}
+        }
+    </style>
+</head>
+<body class="is-preload">
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+
+            <!-- Elements -->
+            <header class="major">
+                <h1>Monthly Salary</h1>
+            </header>
+            <div class="table-wrapper">
+                   <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr class="tHead">
+                                <th class="memberNum">회원 번호</th>
+                                <th class="vocPenaltySum">패널티를 제외한 금액</th>
+                                <th class="vocDate">vocDate 인입 날짜</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${not #lists.isEmpty(getDate)}" th:each=" voc:${getDate}">
+                                    <td th:text="${voc.memberNum}"></td>
+                                    <td th:text="${voc.vocPenaltySum}"></td>
+                                    <td th:text="${voc.vocDate}"></td>
+                                </tr>
+                                <tr th:unless="${not #lists.isEmpty(getDate)}">
+                                    <td colspan="5">조회된 결과가 없습니다.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

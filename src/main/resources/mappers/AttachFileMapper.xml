@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.voctest.mappers.AttachFileMapper">
+    <insert id="insert">
+        INSERT INTO VOC_ATTACH (UUID, UPLOADPATH, FILENAME, IMAGE, VOCNUM)
+        VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{vocNum})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM VOC_ATTACH WHERE UUID = #{uuid}
+    </delete>
+
+    <select id="findByVocNum" resultType="attachFileVO">
+        SELECT UUID, UPLOADPATH, FILENAME, IMAGE, VOCNUM
+        FROM VOC_ATTACH
+        WHERE VOCNUM = #{vocNum}
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM VOC_ATTACH WHERE VOCNUM = #{vocNum}
+    </delete>
+
+    <select id="getOldFiles" resultType="attachFileVO">
+        SELECT UUID, UPLOADPATH, FILENAME, IMAGE, VOCNUM
+        FROM VOC_ATTACH
+        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
+</mapper>

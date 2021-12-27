@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>VOC List</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <style>
+        .big-width {display: block;}
+        .small-width {display: none;}
+        div#searchWrap{display: flex;}
+        select[name='type']{width: 30%;}
+        input[name='keyword']{width: 60%;}
+        form[name='searchForm']{overflow: hidden;}
+
+        @media (max-width: 918px) {
+            .writer {display: none;}
+            .regDate {display: none;}
+            .updateDate {display: none;}
+            .big-width {display: none;}
+            .small-width {display: block;}
+            div#searchWrap{display: block;}
+            select[name='type']{width: 100%;}
+            input[name='keyword']{width: 100%;}
+            a.search{width: 100%;}
+        }
+    </style>
+</head>
+<body class="is-preload">
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
+
+            <!-- Elements -->
+            <header class="major">
+                <h1>VOC List</h1>
+            </header>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr class="tHead">
+                        <th class="vocNum">번호</th>
+                        <th class="vocTitle">제목</th>
+                        <th class="memberNum">회원 번호</th>
+                        <th class="vocPenalty">VOC 인입 사유</th>
+                        <th class="vocPenaltySum">배상 금액</th>
+                        <th class="vocDate">등록일</th>
+                        <th class="memberStatus">승인 여부</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="voc : ${list}">
+                        <tr class="tBody" th:object="${voc}">
+                            <td class="vocNum" th:text="*{vocNum}"></td>
+                            <td class="title"><a id="goRead" th:href="*{vocNum}" th:text="*{vocTitle}"></a>
+                            <td class="memberNum" th:text="*{memberNum}"></td>
+                            <td class="vocPenalty" th:text="*{vocPenalty}"></td>
+                            <td class="vocPenaltySum" th:text="*{vocPenaltySum}"></td>
+                            <td class="vocDate" th:text="*{vocDate}"></td>
+                            <td th:if= "*{memberStatus} == '0'" th:text="미승인"/>
+                            <td th:if= "*{memberStatus} == '1'" th:text="승인"/>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</body>
+<script th:inline="javascript">
+    $("a#goRead").on("click", function(e){
+        e.preventDefault();
+        location.href = "/voc/read?" + "vocNum=" + $(this).attr("href");
+    })
+</script>
+</html>
