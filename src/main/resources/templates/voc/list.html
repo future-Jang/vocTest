@@ -16,9 +16,6 @@
         form[name='searchForm']{overflow: hidden;}
 
         @media (max-width: 918px) {
-            .writer {display: none;}
-            .regDate {display: none;}
-            .updateDate {display: none;}
             .big-width {display: none;}
             .small-width {display: block;}
             div#searchWrap{display: block;}
@@ -48,10 +45,10 @@
                 <table>
                     <thead>
                     <tr class="tHead">
-                        <th class="vocNum">번호</th>
-                        <th class="vocDate">등록일</th>
-                        <th class="memberStatus">승인 여부</th>
-                        <th class="vocTitle">제목</th>
+                        <th class="vocNum" style="width:10%;" >번호</th>
+                        <th class="vocDate" style="width:20%;">등록일</th>
+                        <th class="memberStatus" style="width:10%;">승인 여부</th>
+                        <th class="vocTitle" >제목</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,7 +58,7 @@
                             <td class="vocDate" th:text="*{vocDate}"></td>
                             <td th:if= "*{memberStatus} == '0'" th:text="미승인"/>
                             <td th:if= "*{memberStatus} == '1'" th:text="승인"/>
-                            <th:block th:if="${memberNum} eq *{memberNum}">
+                            <th:block th:if="${memberNum} eq *{memberNum} and ${memberNum} ne 10000">
                             <td class="title"><a id="goRead" th:href="*{vocNum}" th:text="*{vocTitle}"></a>
                             </th:block>
                             <th:block th:if="${memberNum} eq 10000">
@@ -136,7 +133,6 @@
         location.href = "/voc/vocDate";
     }
 
-    // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);

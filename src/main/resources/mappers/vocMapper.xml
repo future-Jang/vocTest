@@ -26,8 +26,7 @@
         SELECT VOCNUM, VOCTITLE,MEMBERNUM, MEMBERSTATUS, VOCDETAIL, VOCPENALTY, VOCPENALTYSUM, VOCDATE
         FROM
         (
-            /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
-            SELECT /*+ INDEX_DESC(VOC VOCNUM) */
+            SELECT /*+ INDEX_DESC(VOC VOC_FK) */
             ROWNUM R, VOCNUM, VOCTITLE,MEMBERNUM, MEMBERSTATUS, VOCDETAIL, VOCPENALTY, VOCPENALTYSUM, VOCDATE
             FROM VOC
             WHERE
@@ -40,18 +39,15 @@
         ]]>
     </select>
 
-    <insert id="insert">
+<!--    <insert id="insert">
         INSERT INTO VOC (VOCNUM, VOCTITLE, MEMBERNUM, MEMBERSTATUS, VOCDETAIL, VOCPENALTY, VOCPENALTYSUM)
         VALUES(SEQ_VOC.NEXTVAL, #{vocTitle}, #{memberNum}, #{memberStatus}, #{vocDetail}, #{vocPenalty}, #{vocPenaltySum})
-    </insert>
+    </insert>-->
 
     <insert id="insertSelectKey_vocNum">
-        /*태그 안에서는 이와 같은 주석으로 사용해야 한다.*/
-        /*게시글 등록 전 다음 시퀀스를 가져와서 insertSelectKey_bno메소드의 매개변수로 매핑후 전달한다.*/
         <selectKey keyProperty="vocNum" order="BEFORE" resultType="long">
             SELECT SEQ_VOC.NEXTVAL FROM DUAL
         </selectKey>
-        /*위에서 전달받은 bno를 사용한다.*/
         INSERT INTO VOC (VOCNUM, VOCTITLE, MEMBERNUM,MEMBERSTATUS, VOCDETAIL,VOCPENALTY, VOCPENALTYSUM)
         VALUES(#{vocNum}, #{vocTitle}, #{memberNum}, #{memberStatus}, #{vocDetail}, #{vocPenalty}, #{vocPenaltySum})
     </insert>

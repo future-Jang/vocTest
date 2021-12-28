@@ -30,7 +30,6 @@
     </style>
 </head>
 <body class="is-preload">
-<!-- Main -->
 <div id="main">
     <div class="wrapper">
         <div class="inner">
@@ -283,11 +282,6 @@
         divTag.html(str);
     }
 
-    //이벤트 위임
-    //작성된 HTML에는 이벤트 처리가 가능하지만,
-    //DOM에서 새롭게 추가되는 HTML에는 이벤트가 반영되지 않는다.
-    //따라서 미리 작성해놓은 HTML에 이벤트를 반영한 후,
-    //해당 자식 태그를 선택하여 이벤트 위임을 진행해야 한다.
     $("div.paging").on("click", "a.changePage", function(e){
         e.preventDefault();
         pageNum = parseInt($(this).attr("href"));

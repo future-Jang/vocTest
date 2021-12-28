@@ -106,12 +106,9 @@ public class AttachFileController {
         Date date = new Date();
         String now = sdf.format(date);
 
-//        - 대신 각 디렉토리의 경로를 구분할 수 있도록 하기 위해서
-//        replace()를 사용한다.
         return now.replace("-", "/");
     }
 
-    //    서버에 업로드된 파일은 시간이 걸리더라도 파일 자체가 이미지인지를 정확하게 체크한 뒤 저장해야 한다.
     private boolean checkImageType(File file){
         try {
             String contentType = Files.probeContentType(file.toPath());
@@ -130,7 +127,6 @@ public class AttachFileController {
         HttpHeaders header = new HttpHeaders();
         ResponseEntity<byte[]> result = null;
         try {
-            //png 파일이면 image/png타입, jpeg파일이면 image/jpeg 타입으로 설정
             header.add("Content-Type", Files.probeContentType(file.toPath()));
             result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
         } catch (IOException e) {

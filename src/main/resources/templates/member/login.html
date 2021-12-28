@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <style>
+        #login{
+            display:flex;
+            justify-content:space-evenly;
+        }
+        #divF{display:flex;justify-content:space-evenly;color:black;width: 30%;flex-direction: column;margin: auto;}
+        #loginbtn{
+            margin-left: 32%;
+            margin-top: 10%;
+        }
+        #memberPw{
+            margin-top: 2%;
+        }
+    </style>
 </head>
-<body>
+<body class="is-preload">
     <section class="main">
-        <h1 id="login">로그인</h1>
+        <div class="wrapper">
+            <div class="inner">
+        <h3 id="login">로그인</h3>
         <form method="post" name="loginForm" action="/member/login">
-            <div style="display:flex; justify-content:space-evenly; color:black;">
+            <div id="divF">
                     <div>
                         <input type="text" name="memberNum" id="memberNum" value="" placeholder="회원번호"/>
                         <input type="password"name="memberPw" id="memberPw" value="" placeholder="비밀번호"/>
-                        <input type="button" value="로그인" onclick="check()"/>
+                        <input type="button" id="loginbtn" value="로그인" onclick="check()"/>
                     </div>
             </div>
         </form>
+            </div>
+        </div>
     </section>
 </body>
 <script>

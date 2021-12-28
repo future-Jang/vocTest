@@ -56,13 +56,6 @@ public class MemberController {
         return "member/join";
     }
 
-/*    @PostMapping("changeSal")
-    public void changeSal(MemberVO memberVO, Model model, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        model.addAttribute("check", session.getAttribute("memberNum"));
-        model.addAttribute("memberNum", memberVO.getMemberNum());
-    }*/
-
     @PostMapping("modifySal")
     public String modifySal(MemberVO memberVO, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
