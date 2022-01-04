@@ -27,5 +27,4 @@ public class AttachFileDAO {
 
     public void deleteAll(Long vocNum){attachFileMapper.deleteAll(vocNum);}
 
-    public List<AttachFileVO> getOldFiles() {return attachFileMapper.getOldFiles();}
 }

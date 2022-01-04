@@ -21,9 +21,4 @@
         DELETE FROM VOC_ATTACH WHERE VOCNUM = #{vocNum}
     </delete>
 
-    <select id="getOldFiles" resultType="attachFileVO">
-        SELECT UUID, UPLOADPATH, FILENAME, IMAGE, VOCNUM
-        FROM VOC_ATTACH
-        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
-    </select>
 </mapper>

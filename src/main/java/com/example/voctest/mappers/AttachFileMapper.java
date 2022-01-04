@@ -9,5 +9,4 @@ public interface AttachFileMapper {
     public void delete(String uuid);
     public List<AttachFileVO> findByVocNum(Long vocNum);
     public void deleteAll(Long vocNum);
-    public List<AttachFileVO> getOldFiles();
 }
