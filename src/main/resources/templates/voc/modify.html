@@ -131,7 +131,7 @@
         let maxSize = 5242880;// 5MB
         let inputFile = $(".uploadDiv input");
         let uploadResult = $(".uploadResult ul");
-        let bno = [[${board.bno}]];
+        let vocNum = [[${voc.vocNum}]];
 
         function showUploadFile(uploadFiles){
             let str = "";
@@ -200,8 +200,8 @@
         });
 
         (function(){
-            console.log(bno);
-            $.getJSON("/voc/getAttachList", {bno: bno},
+            console.log(vocNum);
+            $.getJSON("/voc/getAttachList", {vocNum: vocNum},
                 function(arr){
                     console.log(arr);
                     let str = "";
